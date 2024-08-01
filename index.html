@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Canvas Masjid</title>
+</head>
+<body>    
+    <canvas id="world" width="1000" height="500" style="border: 1px solid black;" ></canvas>
+
+    <script>
+        // Inisialisai canvas
+        let canvas = document.getElementById("world");
+        let context = canvas.getContext("2d");
+
+        context.fillStyle = "green";
+        context.fillRect(0, canvas.height / 2 + 150, canvas.width, canvas.height);
+
+
+        
+
+        function createKubah(x, y, r, color, withEdge = true){
+            context.fillStyle = color;
+            context.beginPath();
+            context.arc(x, y, r, Math.PI, 2 * Math.PI);
+            context.closePath();
+            
+            context.moveTo(x - r, y);
+            context.lineTo(x + r, y);
+            context.lineWidth = r / 10;
+            context.fill();
+
+            if (withEdge) {
+          context.beginPath(); 
+          context.moveTo(x, y - r);
+          context.lineTo(x, y - r - r / 4);
+          context.stroke();
+          context.closePath(); 
+
+          context.beginPath(); 
+          context.arc(x, y - r - r / 4 - r / 4, r / 4, (1 / 4) * Math.PI, (3 / 2) * Math.PI);
+          context.stroke();
+          context.closePath(); 
+        }
+
+        }
+        createKubah(canvas.width / 2 - 2 * 75, canvas.height / 3 - 100, 30, 'teal');
+        createKubah(canvas.width / 2 + 50, canvas.height / 3, 85, 'teal');
+        createKubah(canvas.width / 2 + 2 * 123, canvas.height / 3 - 100, 30, 'teal');
+       
+       
+      function createTembok(x, y, width, height, color) {
+        context.fillStyle = color;
+        context.beginPath();
+        context.rect(x, y, width, height);
+        context.lineWidth = width / 10;
+        context.fill();
+        context.closePath();
+      }
+
+      createTembok(canvas.width / 2 - 150, canvas.height / 3, 350, 300, 'yellow');
+      createTembok(canvas.width / 2 + 200, canvas.height / 3, 100, 300, 'orange');
+      createTembok(canvas.width / 2 - 200, canvas.height / 3, 100, 300, 'orange');
+      createTembok(canvas.width / 2 - 2 * 70 - 40, canvas.height / 3 - 100, 2 * 30, 100, 'orange');
+      createTembok(canvas.width / 2 + 2 * 127 - 37, canvas.height / 3 - 100, 2 * 30, 100, 'orange');
+      
+     //   membuat tangga
+      createTembok(canvas.width / 2 - 150 - 79, canvas.height / 2 + 200, 550, 20, 'orange');
+      createTembok(canvas.width / 2 - 150 - 79 - 25, canvas.height / 2 + 200 + 20, 600, 15, 'orange');
+  
+
+
+      function createPintu(x, y, width, height, color) {
+    createKubah(x, canvas.height / 2 + height, width / 2, color, false);
+    createTembok(x - width / 2, canvas.height / 2 + height, width, height, color)
+}
+    createPintu(canvas.width / 2 + 50, canvas.height / 2 - 110, 120, 100, 'brown');
+    createPintu(canvas.width / 2 - 150, canvas.height / 2 + 110,70, 100, 'brown');
+    createPintu(canvas.width / 2 + 250, canvas.height / 2 - 110,70, 100, 'brown');
+
+    canvas.style.backgroundColor = 'skyblue';
+
+     // Membuat tulisan
+     context.fillStyle = 'black';
+     context.font = '15pt Arial';
+     context.fillText('Masjid Al - Muhajirin', canvas.width / 2 - 50, canvas.height / 2 + 10, 200);
+
+      context.fillStyle = "brown";
+        context.fillRect(175, 250, 50, 150);
+
+    // Membuat daun pohon
+        context.beginPath();
+        context.arc(200, 200, 75, 0, Math.PI * 2);
+        context.fillStyle = "green";
+        context.fill();
+
+        // Membuat pantulan matahari
+        context.beginPath();
+        context.arc(100, 50, 40, 0, Math.PI * 2);
+        context.fillStyle = "yellow";
+        context.fill();
+
+    </script>
+</body>
+</html>
